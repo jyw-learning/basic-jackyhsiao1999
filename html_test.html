@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <button class="theme-btn" @click="toggleTheme">
+            {{ isDarkMode ? '☀️ 亮色模式' : '🌙 暗黑模式' }}
+        </button>
+
+        <br><br>
+        <img :src="currentImage" alt="示例圖片">
+        <br>
+        <button @click="refreshImage">刷新圖片</button>
+        
+        <p>我的GitHub：<a href="https://github.com/jyw-learning/basic-jackyhsiao1999" target="_blank">點此查看</a></p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    isDarkMode: false,
+                    imageUrls: Array.from({ length: 50 }, () => "https://picsum.photos/200/300?random=" + Math.random()),
+                    currentIndex: 0
+                };
+            },
+            computed: {
+                currentImage() {
+                    return this.imageUrls[this.currentIndex];
+                }
+            },
+            methods: {
+                toggleTheme() {
+                    this.isDarkMode = !this.isDarkMode;
+                    document.body.classList.toggle('dark-mode', this.isDarkMode);
+                },
+                refreshImage() {
+                    this.currentIndex = (this.currentIndex + 1) % this.imageUrls.length;
+                    this.preloadImages();
+                },
+                preloadImages() {
+                    this.imageUrls.forEach(url => {
+                        const img = new Image();
+                        img.src = url;
+                    });
+                }
+            },
+            mounted() {
+                this.preloadImages();
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
