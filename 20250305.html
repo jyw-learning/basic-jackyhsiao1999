@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RWD 範例 - 下拉選單修正</title>
+    <title>20250305</title>
     <style>
         /* 基本樣式 */
         body {
@@ -73,10 +73,22 @@
             display: block;
             text-align: left;
         }
+        
+        .dropdown-content a:hover {
+            background-color: #ebebeb;
+            color: black;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #ddd;
+            color: black;
+        }
 
         /* 滑鼠懸停時顯示下拉選單 */
-        .dropdown:hover .dropdown-content {
-            display: block;
+        @media screen and (min-width: 600px) {
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
         }
 
         /* 響應式設計 */
@@ -93,7 +105,7 @@
             }
 
             /* 點擊按鈕時顯示下拉選單 */
-            .dropdown.hover .dropdown-content {
+            .dropdown.active .dropdown-content {
                 display: block;
             }
         }
@@ -108,26 +120,24 @@
 
     <!-- 頂部導航列 -->
     <div class="navbar">
-        <a href="#home">首頁</a>
-        <a href="#news">新聞</a>
+        <a href="https://jyw-learning.github.io/basic-jackyhsiao1999/">首頁</a>
         <div class="dropdown" id="dropdown">
-            <button class="dropbtn" onclick="toggleDropdown()">服務
+            <button class="dropbtn" onclick="toggleDropdown()">作業
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-                <a href="#web-design">網頁設計</a>
-                <a href="#seo">SEO 優化</a>
-                <a href="#marketing">數位行銷</a>
+                <a href="https://jyw-learning.github.io/basic-jackyhsiao1999/html_test.html">第一週</a>
+                <a href="https://jyw-learning.github.io/basic-jackyhsiao1999/MyCard.html">第二週</a>
+                <a href="https://jyw-learning.github.io/basic-jackyhsiao1999/20250305.html">第三週</a>
             </div>
         </div>
-        <a href="#contact">聯絡我們</a>
-        <a href="#about">關於我們</a>
+        <a href="https://github.com/jyw-learning/basic-jackyhsiao1999">我的GitHub</a>
     </div>
 
     <!-- 內容區域 -->
     <div class="content">
-        <h1>歡迎來到我們的網站</h1>
-        <p>這是一個包含下拉選單的 RWD 範例程式。</p>
+        <h1>歡迎來到我網站</h1>
+        <p>互評請手下留情</p>
     </div>
 
     <script>
@@ -136,6 +146,14 @@
             const dropdown = document.getElementById("dropdown");
             dropdown.classList.toggle("active");
         }
+
+        // 點擊頁面其他區域時收起下拉選單
+        document.addEventListener("click", function(event) {
+            const dropdown = document.getElementById("dropdown");
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove("active");
+            }
+        });
     </script>
 
 </body>
